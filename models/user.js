@@ -18,15 +18,23 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     unique: true,
     required: true,
+    // https://www.npmjs.com/package/validator
     validate: [validateEmail, "Please enter a valid email address."],
     match: [emailRegex, "Please enter a valid email address."],
   },
-  thoughts: {
-    // array of _id values referencing the Thought model
-  },
-  friends: {
-    // array of _id values referencing the User model (self-reference)
-  },
+  thoughts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Thought",
+    },
+  ],
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      // array of _id values referencing the User model (self-reference)
+    },
+  ],
 });
 
 userSchema.methods.friendCount = function () {
