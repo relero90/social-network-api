@@ -11,16 +11,15 @@ module.exports = {
   },
 
   async createThought(req, res) {
-    // create a new thought
+    // create a new thought: req.body -->
+    // {
+    //   "thoughtText": "Here's a cool thought...",
+    //   "username": "lernantino",
+    //   "userId": "5edff358a0fcb779aa7b118b"
+    // }
     const newThought = await Thought.create(req.body);
     // push the created thought's _id to the associated user's thoughts array field
     return User.findOneAndUpdate(
-      // req.body -->
-      // {
-      //   "thoughtText": "Here's a cool thought...",
-      //   "username": "lernantino",
-      //   "userId": "5edff358a0fcb779aa7b118b"
-      // }
       { _id: req.body.userId },
       { $push: { thoughts: newThought._id } },
       { new: true }
