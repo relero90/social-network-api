@@ -31,6 +31,7 @@ thoughtSchema.methods.reactionCount = function () {
   return this.reactions.length;
 };
 
+// & reactionSchema.virtual(same thing...)
 thoughtSchema.virtual("friendlyDate").get(() => {
   // use a getter method to format createdAt on query
   return this.createdAt.toLocaleString("en-us", {
