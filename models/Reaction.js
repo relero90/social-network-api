@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const reactionSchema = new mongoose.Schema({
   reactionId: {
-    type: ObjectId,
-    default: new ObjectId(),
+    type: mongoose.ObjectId,
+    default: new mongoose.Types.ObjectId(),
   },
   reactionBody: {
     type: String,
@@ -16,7 +16,7 @@ const reactionSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
     // use a getter method to format the timestamp on query
   },
 });

@@ -1,16 +1,15 @@
 const connection = require("../config/connection");
-const { User, Thought } = require("../models");
-// maybe require in a data.js file here
-const { userSeeds, thoughtSeeds } = require("./data");
+const { Thought } = require("../models");
+const thoughtSeeds = require("./thought-data");
+const chalk = require("chalk");
 
 connection.on("error", (err) => err);
 
 connection.once("open", async () => {
   // remove any existing data
-  await User.deleteMany({});
   await Thought.deleteMany({});
 
-  await User.collection.insertMany(userSeeds);
   await Thought.collection.insertMany(thoughtSeeds);
+  console.log(chalk.green("Thought seeds planted!"));
   process.exit(0);
 });

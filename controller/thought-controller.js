@@ -38,7 +38,7 @@ module.exports = {
   async createReaction(req, res) {
     // POST to create a reaction stored in a single thought's reactions array field
   },
-  async deleteOneThought(req, res) {
+  async deleteReaction(req, res) {
     // DELETE to pull and remove a reaction by the reaction's reactionId value
   },
 };

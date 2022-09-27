@@ -11,7 +11,7 @@ const thoughtSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default: Date.now(),
     },
     username: {
       type: String,
@@ -27,12 +27,21 @@ const thoughtSchema = new mongoose.Schema(
   }
 );
 
-thoughtSchema.methods.reactionCount = function () {
+thoughtSchema.virtual("reactionCount").get(() => {
   return this.reactions.length;
-};
+});
 
-// & reactionSchema.virtual(same thing...)
 thoughtSchema.virtual("friendlyDate").get(() => {
+  // use a getter method to format createdAt on query
+  return this.createdAt.toLocaleString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+});
+
+reactionSchema.virtual("friendlyDate").get(() => {
   // use a getter method to format createdAt on query
   return this.createdAt.toLocaleString("en-us", {
     weekday: "long",

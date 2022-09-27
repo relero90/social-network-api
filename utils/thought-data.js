@@ -1,24 +1,3 @@
-const userSeeds = [
-  {
-    username: "testName1",
-    email: "test1@me.com",
-    // thoughts: [array of id values],
-    // friends: [array of id values],
-  },
-  {
-    username: "testName2",
-    email: "test2@me.com",
-    // thoughts: [array of id values],
-    // friends: [array of id values],
-  },
-  {
-    username: "testName3",
-    email: "test3@me.com",
-    // thoughts: [array of id values],
-    // friends: [array of id values],
-  },
-];
-
 const thoughtSeeds = [
   {
     thoughtText: "example thought text 1",
@@ -60,4 +39,4 @@ const thoughtSeeds = [
   },
 ];
 
-module.exports = { userSeeds, thoughtSeeds };
+module.exports = thoughtSeeds;
