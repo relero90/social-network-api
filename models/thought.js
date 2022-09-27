@@ -1,5 +1,26 @@
 const mongoose = require("mongoose");
 
+const reactionSchema = new mongoose.Schema({
+  reactionId: {
+    type: ObjectId,
+    default: new ObjectId(),
+  },
+  reactionBody: {
+    type: String,
+    required: true,
+    // 280 character maximum
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    // use a getter method to format the timestamp on query
+  },
+});
+
 const thoughtSchema = new mongoose.Schema({
   thoughtText: {
     type: String,
@@ -15,9 +36,7 @@ const thoughtSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reactions: {
-    // array of nested documents created with the reactionSchema
-  },
+  reactions: [reactionSchema],
 });
 
 thoughtSchema.methods.reactionCount = function () {
