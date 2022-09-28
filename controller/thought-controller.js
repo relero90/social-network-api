@@ -4,6 +4,7 @@ module.exports = {
   async getThoughts(req, res) {
     // get all thoughts
     const data = await Thought.find();
+    console.log(data);
     if (!data) {
       res.status(500).json({ message: "Something went wrong..." });
     }
