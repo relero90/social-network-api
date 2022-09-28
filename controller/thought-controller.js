@@ -58,6 +58,11 @@ module.exports = {
 
   async deleteOneThought(req, res) {
     // DELETE to remove a single thought by its _id
+    const wreckage = await Thought.deleteOne({ _id: req.params.id });
+    if (!wreckage) {
+      res.status(404).json({ message: "No thought found with that ID." });
+    }
+    res.status(200).json({ message: "Thought deleted!" });
   },
 
   async createReaction(req, res) {
