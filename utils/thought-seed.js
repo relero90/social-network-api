@@ -10,6 +10,6 @@ connection.once("open", async () => {
   await Thought.deleteMany({});
 
   await Thought.collection.insertMany(thoughtSeeds);
-  console.log(chalk.green("Thought seeds planted!"));
+  console.log(chalk.green("Thought seeds planted! 🌱"));
   process.exit(0);
 });

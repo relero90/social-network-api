@@ -19,12 +19,19 @@ module.exports = {
     //   "userId": "5edff358a0fcb779aa7b118b"
     // }
     const newThought = await Thought.create(req.body);
+    if (!newThought) {
+      res.status(500).json({ message: "Something went wrong." });
+    }
     // push the created thought's _id to the associated user's thoughts array field
-    return User.findOneAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
       { _id: req.body.userId },
       { $push: { thoughts: newThought._id } },
       { new: true }
     );
+    if (!updatedUser) {
+      res.status(500).json({ message: "Something went wrong." });
+    }
+    res.status(200).json(updatedUser);
   },
 
   async getOneThought(req, res) {
