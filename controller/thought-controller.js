@@ -1,4 +1,5 @@
 const { Thought, User } = require("../models");
+const { update } = require("../models/User");
 
 module.exports = {
   async getThoughts(req, res) {
@@ -67,6 +68,22 @@ module.exports = {
 
   async createReaction(req, res) {
     // POST to create a reaction stored in a single thought's reactions array field
+    const updatedThought = await Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      {
+        $push: {
+          reactions: {
+            reactionBody: req.body.reactionBody,
+            username: req.body.username,
+          },
+        },
+      },
+      { new: true }
+    );
+    if (!updatedThought) {
+      res.status(500).json({ message: "Something went wrong." });
+    }
+    res.status(200).json(updatedThought);
   },
 
   async deleteReaction(req, res) {
