@@ -36,6 +36,11 @@ module.exports = {
 
   async getOneThought(req, res) {
     // GET to get a single thought by its _id
+    const selectedThought = await Thought.findOne({ _id: req.params.id });
+    if (!selectedThought) {
+      res.status(404).json({ message: "No thought found with that ID." });
+    }
+    res.status(200).json(selectedThought);
   },
   async updateOneThought(req, res) {
     // PUT to update a single thought by its _id
