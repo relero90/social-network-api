@@ -51,8 +51,7 @@ module.exports = {
     const wreckage = await User.deleteOne({ _id: req.params.id });
     !wreckage
       ? res.status(404).json({ message: "No user found with that ID." })
-      : // BONUS --> remove a user's associated thoughts when deleted
-        Thought.deleteMany({ _id: { $in: wreckage.thoughts } });
+      : Thought.deleteMany({ _id: { $in: wreckage.thoughts } });
 
     res.status(200).json({ message: "User and user's thoughts deleted." });
   },
