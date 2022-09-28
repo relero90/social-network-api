@@ -59,15 +59,24 @@ module.exports = {
 
   async addFriend(req, res) {
     // POST to add a new friend to a user's friend list
-    const updatedUser = await User.findOneAndUpdate(
+    // Add friend to user's friends array
+    const updatedUser1 = await User.findOneAndUpdate(
       { _id: req.params.userId },
       { $push: { friends: req.params.friendId } },
       { new: true }
     );
-    if (!updatedUser) {
+    // Add user to friend's friends array
+    const updatedUser2 = await User.findOneAndUpdate(
+      { _id: req.params.friendId },
+      { $push: { friends: req.params.userId } },
+      { new: true }
+    );
+    // if either user could not be found...
+    if (!updatedUser1 || !updatedUser2) {
       res.status(500).json({ message: "Something went wrong." });
     }
-    res.status(200).json(updatedUser);
+    // respond back with the updated current user
+    res.status(200).json(updatedUser1);
   },
 
   async deleteFriend(req, res) {
