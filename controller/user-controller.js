@@ -35,6 +35,15 @@ module.exports = {
 
   async updateOneUser(req, res) {
     // PUT to update a user by its _id
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    );
+    if (!updatedUser) {
+      res.status(404).json({ message: "No user found with that ID." });
+    }
+    res.status(200).json(updatedUser);
   },
 
   async deleteOneUser(req, res) {

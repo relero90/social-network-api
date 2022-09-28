@@ -42,15 +42,28 @@ module.exports = {
     }
     res.status(200).json(selectedThought);
   },
+
   async updateOneThought(req, res) {
     // PUT to update a single thought by its _id
+    const updatedThought = await Thought.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    );
+    if (!updatedThought) {
+      res.status(404).json({ message: "No thought found with that ID." });
+    }
+    res.status(200).json(updatedThought);
   },
+
   async deleteOneThought(req, res) {
     // DELETE to remove a single thought by its _id
   },
+
   async createReaction(req, res) {
     // POST to create a reaction stored in a single thought's reactions array field
   },
+
   async deleteReaction(req, res) {
     // DELETE to pull and remove a reaction by the reaction's reactionId value
   },
