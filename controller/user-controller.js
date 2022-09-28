@@ -26,6 +26,11 @@ module.exports = {
 
   async getOneUser(req, res) {
     // GET a single user by its _id and populated thought and friend data
+    const selectedUser = await User.findOne({ _id: req.params.id });
+    if (!selectedUser) {
+      res.status(404).json({ message: "No user found with that ID." });
+    }
+    res.status(200).json(selectedUser);
   },
 
   async updateOneUser(req, res) {
