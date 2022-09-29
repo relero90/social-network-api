@@ -28,29 +28,29 @@ const thoughtSchema = new mongoose.Schema(
   }
 );
 
-thoughtSchema.virtual("reactionCount").get(() => {
-  return typeof this.reactions;
+thoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
 });
 
-// thoughtSchema.virtual("friendlyDate").get(() => {
-//   // use a getter method to format createdAt on query
-//   return this.createdAt.toLocaleString("en-us", {
-//     weekday: "long",
-//     year: "numeric",
-//     month: "short",
-//     day: "numeric",
-//   });
-// });
+thoughtSchema.virtual("friendlyDate").get(function () {
+  // use a getter method to format createdAt on query
+  return this.createdAt.toLocaleString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+});
 
-// reactionSchema.virtual("friendlyDate").get(() => {
-//   // use a getter method to format createdAt on query
-//   return this.createdAt.toLocaleString("en-us", {
-//     weekday: "long",
-//     year: "numeric",
-//     month: "short",
-//     day: "numeric",
-//   });
-// });
+reactionSchema.virtual("friendlyDate").get(function () {
+  // use a getter method to format createdAt on query
+  return this.createdAt.toLocaleString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+});
 
 const Thought = mongoose.model("Thought", thoughtSchema);
 
