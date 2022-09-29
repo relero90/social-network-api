@@ -28,9 +28,9 @@ const thoughtSchema = new mongoose.Schema(
   }
 );
 
-// thoughtSchema.virtual("reactionCount").get(() => {
-//   return this.reactions.length;
-// });
+thoughtSchema.virtual("reactionCount").get(() => {
+  return typeof this.reactions;
+});
 
 // thoughtSchema.virtual("friendlyDate").get(() => {
 //   // use a getter method to format createdAt on query

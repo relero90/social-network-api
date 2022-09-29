@@ -4,7 +4,6 @@ module.exports = {
   async getUsers(req, res) {
     // GET all users
     const data = await User.find();
-    console.log(data);
     if (!data) {
       res.status(500).json({ message: "Something went wrong..." });
     }
@@ -21,11 +20,15 @@ module.exports = {
     if (!newUser) {
       res.status(500).json({ message: "Something went wrong..." });
     }
+    newUser.select("-__v");
     res.status(200).json(newUser);
   },
 
   async getOneUser(req, res) {
-    const selectedUser = await User.findOne({ _id: req.params.id });
+    const selectedUser = await User.findOne({ _id: req.params.id })
+      .select("-__v")
+      .populate("thoughts")
+      .populate("friends");
     if (!selectedUser) {
       res.status(404).json({ message: "No user found with that ID." });
     }
@@ -39,7 +42,10 @@ module.exports = {
       { _id: req.params.id },
       { $set: req.body },
       { runValidators: true, new: true }
-    );
+    )
+      .select("-__v")
+      .populate("thoughts")
+      .populate("friends");
     if (!updatedUser) {
       res.status(404).json({ message: "No user found with that ID." });
     }
@@ -63,7 +69,10 @@ module.exports = {
       { _id: req.params.userId },
       { $push: { friends: req.params.friendId } },
       { new: true }
-    );
+    )
+      .select("-__v")
+      .populate("thoughts")
+      .populate("friends");
     // Add user to friend's friends array
     const updatedUser2 = await User.findOneAndUpdate(
       { _id: req.params.friendId },

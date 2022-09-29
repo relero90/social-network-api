@@ -10,6 +10,6 @@ connection.once("open", async () => {
   await User.deleteMany({});
 
   await User.collection.insertMany(userSeeds);
-  console.log(chalk.blue("User seeds planted! 🌱"));
+  console.log(chalk.magenta("User seeds planted! 🌱"));
   process.exit(0);
 });
