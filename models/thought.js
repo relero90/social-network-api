@@ -17,7 +17,7 @@ const thoughtSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userId: String,
+    // userId: String,
     reactions: [reactionSchema],
   },
   {
@@ -32,8 +32,8 @@ thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-thoughtSchema.virtual("friendlyDate").get(function () {
-  // use a getter method to format createdAt on query
+// use a getter method to format createdAt on query
+thoughtSchema.virtual("formatDate").get(function () {
   return this.createdAt.toLocaleString("en-us", {
     weekday: "long",
     year: "numeric",
@@ -42,8 +42,7 @@ thoughtSchema.virtual("friendlyDate").get(function () {
   });
 });
 
-reactionSchema.virtual("friendlyDate").get(function () {
-  // use a getter method to format createdAt on query
+reactionSchema.virtual("formatDate").get(function () {
   return this.createdAt.toLocaleString("en-us", {
     weekday: "long",
     year: "numeric",

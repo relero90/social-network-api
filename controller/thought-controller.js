@@ -24,7 +24,7 @@ module.exports = {
     }
     // push the created thought's _id to the associated user's thoughts array field
     const updatedUser = await User.findOneAndUpdate(
-      { _id: req.body.userId },
+      { username: req.body.username },
       { $push: { thoughts: newThought._id } },
       { new: true }
     );
