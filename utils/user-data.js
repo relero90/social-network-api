@@ -1,21 +1,15 @@
 const userSeeds = [
   {
-    username: "testName1",
-    email: "test1@me.com",
-    // thoughts: [array of id values],
-    // friends: [array of id values],
+    username: "blossom",
+    email: "blossom@me.com",
   },
   {
-    username: "testName2",
-    email: "test2@me.com",
-    // thoughts: [array of id values],
-    // friends: [array of id values],
+    username: "bubbles",
+    email: "bubbles@me.com",
   },
   {
-    username: "testName3",
-    email: "test3@me.com",
-    // thoughts: [array of id values],
-    // friends: [array of id values],
+    username: "buttercup",
+    email: "buttercup@me.com",
   },
 ];
 
