@@ -20,7 +20,6 @@ module.exports = {
     if (!newUser) {
       res.status(500).json({ message: "Something went wrong..." });
     }
-    newUser.select("-__v");
     res.status(200).json(newUser);
   },
 
