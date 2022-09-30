@@ -15,7 +15,6 @@ module.exports = {
     // {
     //   "thoughtText": "Here's a cool thought...",
     //   "username": "lernantino",
-    //   "userId": "5edff358a0fcb779aa7b118b"
     // }
     const newThought = await Thought.create(req.body);
     if (!newThought) {
@@ -24,9 +23,10 @@ module.exports = {
     // push the created thought's _id to the associated user's thoughts array field
     const updatedUser = await User.findOneAndUpdate(
       { username: req.body.username },
-      { $push: { thoughts: newThought._id } },
+      { $addToSet: { thoughts: newThought._id } },
       { new: true }
     );
+    console.log(updatedUser);
     if (!updatedUser) {
       res.status(500).json({ message: "Something went wrong." });
     }
@@ -57,17 +57,29 @@ module.exports = {
 
   async deleteOneThought(req, res) {
     // DELETE to remove a single thought by its _id
-    const wreckage = await Thought.deleteOne({ _id: req.params.id });
-    if (!wreckage) {
+    const deletedThought = await Thought.findOneAndDelete({
+      _id: req.params.id,
+    });
+    if (!deletedThought) {
       res.status(404).json({ message: "No thought found with that ID." });
     }
-    res.status(200).json({ message: "Thought deleted!" });
+
+    const updatedUser = await User.findOneAndUpdate(
+      { username: deletedThought.username },
+      { $pull: { thoughts: req.params.id } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      res.status(404).json({ message: "No user found with that username." });
+    }
+    res.status(200).json(updatedUser);
   },
 
   async createReaction(req, res) {
     // POST to create a reaction stored in a single thought's reactions array field
     const updatedThought = await Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
+      { _id: req.params.id },
       {
         $push: {
           reactions: {
@@ -79,7 +91,7 @@ module.exports = {
       { new: true }
     );
     if (!updatedThought) {
-      res.status(500).json({ message: "Something went wrong." });
+      res.status(500).json({ message: "No thought matches that ID." });
     }
     res.status(200).json(updatedThought);
   },
@@ -88,7 +100,7 @@ module.exports = {
     console.log(req.body.reactionId);
     // DELETE to pull and remove a reaction by the reaction's reactionId value
     const updatedThought = await Thought.findOneAndUpdate(
-      { _id: req.params.thoughtId },
+      { _id: req.params.id },
       { $pull: { reactions: { reactionId: req.body.reactionId } } },
       { new: true }
     );

@@ -1,18 +1,15 @@
 const thoughtSeeds = [
   {
     thoughtText: "Oh look, another glorious morning. Makes me sick!",
-    username: "winnifreds",
-    userId: "6335dca2c7f6f11294771b5c",
+    username: "winnifred",
   },
   {
-    thoughtText: "I suggest we form a calming circle.",
-    username: "marys",
-    userId: "6335dca2c7f6f11294771b5d",
+    thoughtText: "It's the chocolate-covered finger of a man named Clark.",
+    username: "mary",
   },
   {
-    thoughtText: "Amuck! Amuck! Amuck! Amuck!",
-    username: "sarahs",
-    userId: "6335dca2c7f6f11294771b5e",
+    thoughtText: "Come little children. The time's come to play.",
+    username: "sarah",
   },
 ];
 

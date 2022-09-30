@@ -3,7 +3,7 @@ const { Thought, User } = require("../models");
 module.exports = {
   async getUsers(req, res) {
     // GET all users
-    const data = await User.find();
+    const data = await User.find().select("-__v");
     if (!data) {
       res.status(500).json({ message: "Something went wrong..." });
     }
@@ -53,7 +53,7 @@ module.exports = {
 
   async deleteOneUser(req, res) {
     // DELETE to remove user by its _id
-    const wreckage = await User.deleteOne({ _id: req.params.id });
+    const wreckage = await User.findOneAndDelete({ _id: req.params.id });
     !wreckage
       ? res.status(404).json({ message: "No user found with that ID." })
       : Thought.deleteMany({ _id: { $in: wreckage.thoughts } });

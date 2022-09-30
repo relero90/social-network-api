@@ -4,8 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "user-seeds": "node utils/user-seed.js",
-    "thought-seeds": "node utils/thought-seed.js",
+    "seed": "node utils/seed.js",
     "dev": "nodemon server.js"
   },
   "dependencies": {
