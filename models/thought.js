@@ -12,17 +12,22 @@ const thoughtSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
+      get: formatDate,
     },
     username: {
       type: String,
       required: true,
     },
-    // userId: String,
     reactions: [reactionSchema],
   },
   {
+    runGettersOnQuery: true,
     toJSON: {
       virtuals: true,
+      getters: true,
+    },
+    toObject: {
+      getters: true,
     },
     id: false,
   }
@@ -33,23 +38,17 @@ thoughtSchema.virtual("reactionCount").get(function () {
 });
 
 // use a getter method to format createdAt on query
-thoughtSchema.virtual("formatDate").get(function () {
-  return this.createdAt.toLocaleString("en-us", {
+function formatDate(createdAt) {
+  return createdAt.toLocaleString("en-us", {
     weekday: "long",
     year: "numeric",
     month: "short",
     day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
   });
-});
-
-reactionSchema.virtual("formatDate").get(function () {
-  return this.createdAt.toLocaleString("en-us", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-});
+}
 
 const Thought = mongoose.model("Thought", thoughtSchema);
 

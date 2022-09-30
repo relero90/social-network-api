@@ -22,6 +22,7 @@ module.exports = {
     if (!newThought) {
       res.status(500).json({ message: "Something went wrong." });
     }
+    newThought.select("-__v");
     // push the created thought's _id to the associated user's thoughts array field
     const updatedUser = await User.findOneAndUpdate(
       { username: req.body.username },
@@ -31,7 +32,7 @@ module.exports = {
     if (!updatedUser) {
       res.status(500).json({ message: "Something went wrong." });
     }
-    res.status(200).json(updatedUser);
+    res.status(200).json(newThought);
   },
 
   async getOneThought(req, res) {
