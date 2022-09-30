@@ -4,8 +4,11 @@ const reactionSchema = new mongoose.Schema(
   {
     reactionId: {
       type: mongoose.ObjectId,
-      default: new mongoose.Types.ObjectId(),
+      default: () => {
+        return new mongoose.Types.ObjectId();
+      },
     },
+    _id: { id: false },
     reactionBody: {
       type: String,
       required: true,
