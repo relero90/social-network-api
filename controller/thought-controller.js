@@ -26,7 +26,6 @@ module.exports = {
       { $addToSet: { thoughts: newThought._id } },
       { new: true }
     );
-    console.log(updatedUser);
     if (!updatedUser) {
       res.status(500).json({ message: "Something went wrong." });
     }
@@ -66,14 +65,18 @@ module.exports = {
 
     const updatedUser = await User.findOneAndUpdate(
       { username: deletedThought.username },
-      { $pull: { thoughts: { _id: req.params.id } } },
+      { $pull: { thoughts: req.params.id } },
       { new: true }
     );
 
     if (!updatedUser) {
-      res.status(404).json({ message: "No user found with that username." });
+      res.status(404).json({
+        message:
+          "Thought was deleted but no user was found with the requested username.",
+      });
+    } else {
+      res.status(200).json(updatedUser);
     }
-    res.status(200).json(updatedUser);
   },
 
   async createReaction(req, res) {

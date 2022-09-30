@@ -14,8 +14,8 @@ connection.once("open", async () => {
   await User.collection.insertMany(userSeeds);
   console.log(chalk.magenta("User seeds planted! 🌱"));
 
-  await Thought.collection.insertMany(thoughtSeeds);
-  console.log(chalk.blue("Thought seeds planted! 🌱"));
+  // await Thought.collection.insertMany(thoughtSeeds);
+  // console.log(chalk.blue("Thought seeds planted! 🌱"));
 
   process.exit(0);
 });
