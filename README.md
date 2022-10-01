@@ -14,10 +14,6 @@ This is a backend database and server that can track users along with their thou
 
 1. [Installation](#installation)
 1. [Usage Recommendations](#usage)
-1. [Licensing](#licensing)
-1. [Credits](#credits)
-1. [How to Contribute](#how-to-contribute)
-1. [Testing](#testing)
 1. [Questions?](#questions)
 
 ## Installation
@@ -31,12 +27,6 @@ Clone the repository data to your local device. To start the server, run `npm ru
 ---
 
 This API can be integrated with your front end code to support social media functionality on your site.
-
-## Licensing
-
----
-
-[Click here for more information about the MIT license](https://choosealicense.com/licenses/mit/)
 
 ## Questions?
 
