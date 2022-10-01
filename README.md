@@ -28,6 +28,8 @@ Clone the repository data to your local device. To start the server, run `npm ru
 
 This API can be integrated with your front end code to support social media functionality on your site.
 
+To see the API in action, check out this [demonstration video](https://watch.screencastify.com/v/QbaorDThnNm9PePTZ6AJ).
+
 ## Questions?
 
 ---
