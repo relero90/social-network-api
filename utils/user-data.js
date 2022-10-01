@@ -1,14 +1,14 @@
 const userSeeds = [
   {
-    username: "winnifred",
+    username: "winnifredsanderson",
     email: "winnifreds@blackflamecomeback.com",
   },
   {
-    username: "mary",
+    username: "marysanderson",
     email: "marys@blackflamecomeback.com",
   },
   {
-    username: "sarah",
+    username: "sarahsanderson",
     email: "sarahs@blackflamecomeback.com",
   },
 ];

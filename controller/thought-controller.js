@@ -102,7 +102,6 @@ module.exports = {
   },
 
   async deleteReaction(req, res) {
-    console.log(req.body.reactionId);
     // DELETE to pull and remove a reaction by the reaction's reactionId value
     const updatedThought = await Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
