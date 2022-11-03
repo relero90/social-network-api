@@ -8,7 +8,7 @@
 
 This is a backend MongoDB database and Express JS server that can track users along with their thoughts and reactions to thoughts. The database also tracks friend lists.
 
-![A screenshot of the database in Mongo Compass showing a thought, it's associated user data, and user reactions.](./data-screenshot.png)
+![A screenshot of the database in Mongo Compass showing a thought, it's associated user data, and user reactions.](./compass-screenshot.png)
 
 ## Table of Contents
 
