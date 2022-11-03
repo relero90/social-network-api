@@ -6,7 +6,9 @@
 
 ---
 
-This is a backend database and server that can track users along with their thoughts and reactions to thoughts. The database also tracks friend lists.
+This is a backend MongoDB database and Express JS server that can track users along with their thoughts and reactions to thoughts. The database also tracks friend lists.
+
+![A screenshot of the result of a query for thoughts in the database showing a thought, it's associated user data, and user reactions.](./data-screenshot.png)
 
 ## Table of Contents
 
